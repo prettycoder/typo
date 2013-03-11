@@ -45,8 +45,11 @@ gem 'acts_as_tree_rails3'
 gem 'recaptcha', :require => 'recaptcha/rails', :branch => 'rails3'
 
 group :development, :test do
+  gem 'awesome_print'
   gem 'ruby-debug19'
   gem 'factory_girl', '~> 2.2'
+  gem 'factory_girl_rails'
+  gem 'faker'
   gem 'webrat'
   gem 'rspec-rails', '~> 2.0'
   gem 'simplecov', :require => false
@@ -56,4 +59,5 @@ group :development, :test do
   gem 'cucumber-rails-training-wheels'
   gem 'database_cleaner'
   gem 'capybara'
+  gem 'pry'
 end
