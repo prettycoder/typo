@@ -630,5 +630,25 @@ describe Article do
     end
 
   end
+
+  describe "merge" do
+    it "should merge the two articles" do
+      user = Factory(:user, id: 7, name: "James Bond")
+      user_2 = Factory(:user, id: 8, name: "Miss Moneypenny")
+      article_1 = Factory(:article, id: 3, title: "Title 1", body: "body_1", user: user, author: user.name)
+      article_2 = Factory(:article, id: 4, title: "Title 2", body: "body_2", user: user_2, author: user_2.name)
+      comment_1 = Factory(:comment, article: article_1)
+      comment_2 = Factory(:comment, article: article_2)
+
+      article_1.merge(4)
+      article_1.title.should include("Title 1")
+      article_1.body.should include("body_1")
+      article_1.body.should include("body_2")
+      article_1.user.should == user
+      article_1.author.should == "James Bond"
+      article_1.comment_ids.should =~ [comment_1.id, comment_2.id]
+      Article.find(4).should == nil
+    end
+  end
 end
 
