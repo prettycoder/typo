@@ -1,0 +1,7 @@
+<%= form_tag(action: "merge", :id => "merge_form") do %>
+  <%= label_tag(:merge_this, "Article ID") %>
+  <%= text_field_tag(:merge_this) %>
+  <%= submit_tag("Merge") %>
+<% end %>
+
+
