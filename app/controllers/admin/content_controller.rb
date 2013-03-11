@@ -38,8 +38,12 @@ class Admin::ContentController < Admin::BaseController
   end
 
   def merge
+    id = params[:id] = params[:article_id].to_i
+    mid = params[:merge_with].to_i
+    @article = Article.find(id)
+    @article.merge(mid) unless (id == mid)
 
-    edit
+    new_or_edit
   end
 
   def destroy
@@ -151,8 +155,8 @@ class Admin::ContentController < Admin::BaseController
     @article.text_filter = current_user.text_filter if current_user.simple_editor?
 
     @post_types = PostType.find(:all)
-    if request.post?
-      if params[:article][:draft]
+    if request.post? && !params[:action] == 'merge'
+      if params[:article] && params[:article][:draft]
         get_fresh_or_existing_draft_for_article
       else
         if not @article.parent_id.nil?
@@ -167,7 +171,7 @@ class Admin::ContentController < Admin::BaseController
         
     @article.published_at = DateTime.strptime(params[:article][:published_at], "%B %e, %Y %I:%M %p GMT%z").utc rescue Time.parse(params[:article][:published_at]).utc rescue nil
 
-    if request.post?
+    if request.post? && !params[:action] == 'merge'
       set_article_author
       save_attachments
       

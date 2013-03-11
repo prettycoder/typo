@@ -4,10 +4,10 @@
 
 <% if current_user.admin? %>
   <h4><%= _("Merge Articles") %></h4>
-  <%= form_tag(action: "merge", :id => "merge_form") do %>
-    <%= hidden_field_tag(:id, "#{@article.id}") %>
-    <%= label_tag(:merge_this, "Article ID ") %>
-    <%= text_field_tag(:merge_this) %>
+  <%= form_tag(action: "merge") do %>
+    <%= hidden_field_tag(:article_id, @article.id) %>
+    <%= label_tag(:merge_with, "Article ID ") %>
+    <%= text_field_tag(:merge_with) %>
     <br />
     <%= submit_tag("Merge") %>
   <% end %>

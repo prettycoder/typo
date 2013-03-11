@@ -10,6 +10,7 @@ class Comment < Feedback
   attr_accessor :user_agent
   attr_accessor :referrer
   attr_accessor :permalink
+  attr_accessor :article
 
   def notify_user_via_email(user)
     if user.notify_via_email?
