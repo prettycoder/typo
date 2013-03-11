@@ -74,7 +74,7 @@ class Article < Content
   def merge(id)
     other = Article.find(id)
 
-    self.body += other.body
+    self.body += " #{other.body}"
     other.comments.map do |c|
       c.article = self
     end
