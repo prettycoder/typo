@@ -30,17 +30,17 @@ Factory.sequence :time do |n|
 end
 
 Factory.define :user do |u|
-  u.login { Faker::Name.first_name }
-  u.email { Faker::Internet.email }
-  u.name { Faker::Name.name }
+  u.login { Factory.next(:user) }
+  u.email { Factory.next(:user) }
+  u.name 'Bond'
   u.notify_via_email false
   u.notify_on_new_articles false
   u.notify_on_comments false
   u.password 'top-secret'
   u.settings({})
   u.state 'active'
-  u.profile { Factory(:profile) }
-  u.text_filter { Factory(:textile) }
+  u.profile {Factory(:profile)}
+  u.text_filter {Factory(:textile)}
 end
 
 def some_user
@@ -51,7 +51,7 @@ Factory.define :article do |a|
   a.title 'A big article'
   a.body 'A content with several data'
   a.extended 'extended content for fun'
-  a.guid { rand }
+  a.guid { Factory.next(:guid) }
   a.permalink 'a-big-article'
   a.published_at '2005-01-01 02:00:00'
   a.updated_at { Factory.next(:time) }
@@ -143,16 +143,16 @@ Factory.define :blog do |b|
   b.default_allow_comments true
   b.email_from "scott@sigkill.org"
   b.theme "typographic"
-  b.text_filter { Factory(:textile).name }
+  b.text_filter Factory(:textile).name
   b.sp_article_auto_close 0
   b.link_to_author false
-  b.comment_text_filter { Factory(:markdown).name }
+  b.comment_text_filter Factory(:markdown).name
   b.permalink_format "/%year%/%month%/%day%/%title%"
   b.use_canonical_url true
 end
 
 Factory.define :profile, :class => :profile do |l|
-  l.label { Faker::Lorem.word }
+  l.label {Factory.next(:label)}
   l.nicename 'Typo contributor'
   l.modules [:dashboard, :profile]
 end
@@ -204,7 +204,7 @@ Factory.define :comment do |c|
   c.created_at '2005-01-01 02:00:00'
   c.updated_at '2005-01-01 02:00:00'
   c.published_at '2005-01-01 02:00:00'
-  c.guid { rand }
+  c.guid '12313123123123123'
   c.state 'ham'
 end
 
