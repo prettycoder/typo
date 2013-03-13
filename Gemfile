@@ -48,7 +48,6 @@ group :development, :test do
   gem 'awesome_print'
   gem 'ruby-debug19'
   gem 'factory_girl', '~> 2.2'
-  gem 'factory_girl_rails'
   gem 'faker'
   gem 'webrat'
   gem 'rspec-rails', '~> 2.0'
