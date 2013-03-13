@@ -1,14 +1,16 @@
+require File.expand_path(File.join(File.dirname(__FILE__), "..", "..", "spec", "factories"))
+
 Given /^there are the following users:$/ do |users|
   users.hashes.each do |u|
-    FactoryGirl.create(:user, name: u[:name])
+    Factory(:user, name: u[:name])
   end
 end
 
 Given /^there are the following articles with comments:$/ do |articles|
   articles.hashes.each do |a|
     author = User.find_by_name a[:author]
-    article = FactoryGirl.create(:article, title: a[:title], user: author, body: a[:content])
-    FactoryGirl.create(:comment, article: article, body: a[:comment])
+    article = Factory(:article, title: a[:title], user: author, body: a[:content])
+    Factory(:comment, article: article, body: a[:comment])
   end
 end
 

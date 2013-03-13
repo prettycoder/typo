@@ -67,8 +67,6 @@ GEM
     eventmachine (1.0.0)
     factory_girl (2.6.4)
       activesupport (>= 2.3.9)
-    faker (1.1.2)
-      i18n (~> 0.5)
     ffi (1.1.5)
     flickraw (0.9.6)
     flickraw-cached (20120701)
@@ -202,7 +200,6 @@ DEPENDENCIES
   cucumber-rails-training-wheels
   database_cleaner
   factory_girl (~> 2.2)
-  faker
   flickraw-cached
   htmlentities
   json
