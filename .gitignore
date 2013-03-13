@@ -23,3 +23,7 @@ public/cache/*
 .rbenv-version
 bin/
 .bundle/
+zeus.json
+submission.txt
+db/db_test
+db/db_development
