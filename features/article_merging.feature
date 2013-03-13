@@ -8,19 +8,27 @@ Feature: Merge Articles
 
   Scenario: When articles are merged, the merged article should contain the text of both previous articles
     Given I am logged into the admin panel
-    And there is an article with the title "Women's day"
-    And there is an article with the title "UNO moto for Women's day"
-    And all articles have a comment
-    And I am on the edit page of the article "Women's day"
-    And I merge it with the article "UNO moto for Women's day"
+    And there are the following users:
+      | name        |
+      | Mark First  |
+      | Susy Second |
+    And there are the following articles with comments:
+      | title       | author      | content                           | comment                |
+      | Article One | Mark First  | This is the first article         | I like it              |
+      | Article Two | Susy Second | Here is more about the same topic | I am totally convinced |
+    And I go to the edit article "Article One" page
+    And I merge it with "Article Two"
 
-    Then I should be on the admin content page
-    And there should be two articles with the title "Women's day"
+    When I am on the articles page
+    Then I should see "Article One"
+    And I should not see "Article Two"
 
-    When I read the newer article called "Women's day"
-    Then the content should be the combination of the content of the first two articles
-    And the author should be the author of the first article
-    And the comments should include the comments of the first two articels
+    When I go to the "Article One" page
+    Then the content should include "This is the first article"
+    And the content should include "Here is more about the same topic"
+    And the author should be "Mark First"
+    And the comments should include "I like it"
+    And the comments should include "I am totally convinced"
 
   Scenario: A non-admin cannot merge two articles
     Given I am logged in as a non-admin user
