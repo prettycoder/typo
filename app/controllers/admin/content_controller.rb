@@ -155,7 +155,7 @@ class Admin::ContentController < Admin::BaseController
     @article.text_filter = current_user.text_filter if current_user.simple_editor?
 
     @post_types = PostType.find(:all)
-    if request.post? && !params[:action] == 'merge'
+    if request.post? && params[:action] != 'merge'
       if params[:article] && params[:article][:draft]
         get_fresh_or_existing_draft_for_article
       else
@@ -171,7 +171,7 @@ class Admin::ContentController < Admin::BaseController
         
     @article.published_at = DateTime.strptime(params[:article][:published_at], "%B %e, %Y %I:%M %p GMT%z").utc rescue Time.parse(params[:article][:published_at]).utc rescue nil
 
-    if request.post? && !params[:action] == 'merge'
+    if request.post? && params[:action] != 'merge'
       set_article_author
       save_attachments
       
