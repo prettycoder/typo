@@ -15,7 +15,7 @@ Given /^there are the following articles with comments:$/ do |articles|
 end
 
 Given /^I merge it with "(.*?)"$/ do |title|
-  id = Article.find_by_title(title)
+  id = Article.find_by_title(title).id
   fill_in("merge_with", with: id)
   click_button('Merge')
 end

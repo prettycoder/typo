@@ -17,18 +17,17 @@ Feature: Merge Articles
       | Article One | Mark First  | This is the first article         | I like it              |
       | Article Two | Susy Second | Here is more about the same topic | I am totally convinced |
     And I go to the edit article "Article One" page
-    And I merge it with "Article Two"
 
-    When I am on the articles page
-    Then I should see "Article One"
-    And I should not see "Article Two"
-
-    When I go to the "Article One" page
+    When I merge it with "Article Two"
     Then the content should include "This is the first article"
     And the content should include "Here is more about the same topic"
     And the author should be "Mark First"
     And the comments should include "I like it"
     And the comments should include "I am totally convinced"
+
+    When I am on the articles page
+    Then I should see "Article One"
+    And I should not see "Article Two"
 
   Scenario: A non-admin cannot merge two articles
     Given I am logged in as a non-admin user
