@@ -647,7 +647,7 @@ describe Article do
       article_1.user.should == user
       article_1.author.should == "James Bond"
       article_1.comment_ids.should =~ [comment_1.id, comment_2.id]
-      Article.find(4).should == nil
+      Article.all.should_not include(article_2)
     end
   end
 end
