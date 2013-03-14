@@ -77,8 +77,10 @@ class Article < Content
     self.body += " #{other.body}"
     other.comments.map do |c|
       c.article = self
+      c.save
     end
     self.save
+    self.reload
     other.delete
   end
 
