@@ -677,19 +677,19 @@ describe Admin::ContentController do
       Factory(:blog)
       @user = Factory(:user, :profile => Factory(:profile_admin, :label => Profile::ADMIN))
       request.session = { :user => @user.id }
-
-
     end
 
     context "when the two articles are different" do
+      before do
+        stub(:new_or_edit)
+      end
       it "should merge the two articles " do
         article_1 = Factory(:article, id: 13)
         article_2 = stub(:article_2, id: 12)
-        Article.should_receive(:find).with(article_1.id).and_return(article_1)
+        Article.stub(:find).and_return(article_1)
         article_1.should_receive(:merge).with(12)
 
-        post :merge, article_id: article_1.id, merge_this: 12
-        response.should render_template 'new'
+        post :merge, article_id: article_1.id, merge_with: 12
       end
     end
 
